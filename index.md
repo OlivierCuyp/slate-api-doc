@@ -631,31 +631,3 @@ This operation does not require authentication
 |---|---|---|---|---|
 |error|string|true|none|none|
 |validations|object|false|none|none|
-
-
-["2020-12-03T22:09:37.061Z"] ERROR (swagger-test/198 on 6acf4306ce15):
-    version: "1.0.0"
-    module: "/var/www/src/server.js"
-    event: "SERVER_FAIL"
-    indexed: {
-      "error": {
-        "type": "NotFound",
-        "message": "not found",
-        "stack": "Not Found: not found\n    at RequestValidator.validate (/var/www/node_modules/express-openapi-validator/dist/middlewares/openapi.request.validator.js:32:19)\n    at /var/www/node_modules/express-openapi-validator/dist/openapi.validator.js:207:53\n    at /var/www/node_modules/express-openapi-validator/dist/openapi.validator.js:142:28\n    at processTicksAndRejections (internal/process/task_queues.js:97:5)",
-        "name": "Not Found",
-        "status": 404,
-        "path": "/favicon.ico",
-        "errors": [
-          {
-            "path": "/favicon.ico",
-            "message": "not found"
-          }
-        ]
-      }
-    }
-    raw: {
-      "method": "GET",
-      "path": "/favicon.ico",
-      "query": {},
-      "body": {}
-    }
