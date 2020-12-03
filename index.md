@@ -1,13 +1,12 @@
+---
 title: Simple Book API overview v1
 language_tabs:
-  - shell: Shell
+  - go: Go
   - http: HTTP
   - javascript: JavaScript
-  - ruby: Ruby
+  - javascript--node: Node.JS
   - python: Python
-  - php: PHP
-  - java: Java
-  - go: Go
+  - ruby: Ruby
 toc_footers: []
 includes: []
 search: true
@@ -32,11 +31,29 @@ Base URLs:
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X POST http://localhost:3000/books \
-  -H 'Content-Type: application/json' \
-  -H 'Accept: application/json'
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/json"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "http://localhost:3000/books", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
 
 ```
 
@@ -73,6 +90,19 @@ fetch('http://localhost:3000/books',
 
 ```
 
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json'
+}
+
+r = requests.post('http://localhost:3000/books', headers = headers)
+
+print(r.json())
+
+```
+
 ```ruby
 require 'rest-client'
 require 'json'
@@ -87,94 +117,6 @@ result = RestClient.post 'http://localhost:3000/books',
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Content-Type': 'application/json',
-  'Accept': 'application/json'
-}
-
-r = requests.post('http://localhost:3000/books', headers = headers)
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Content-Type' => 'application/json',
-    'Accept' => 'application/json',
-);
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('POST','http://localhost:3000/books', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("http://localhost:3000/books");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("POST");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Content-Type": []string{"application/json"},
-        "Accept": []string{"application/json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("POST", "http://localhost:3000/books", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -226,10 +168,28 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET http://localhost:3000/books \
-  -H 'Accept: application/json'
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "http://localhost:3000/books", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
 
 ```
 
@@ -260,6 +220,18 @@ fetch('http://localhost:3000/books',
 
 ```
 
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('http://localhost:3000/books', headers = headers)
+
+print(r.json())
+
+```
+
 ```ruby
 require 'rest-client'
 require 'json'
@@ -273,91 +245,6 @@ result = RestClient.get 'http://localhost:3000/books',
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('http://localhost:3000/books', headers = headers)
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Accept' => 'application/json',
-);
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('GET','http://localhost:3000/books', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("http://localhost:3000/books");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://localhost:3000/books", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
@@ -392,10 +279,28 @@ This operation does not require authentication
 
 > Code samples
 
-```shell
-# You can also use wget
-curl -X GET http://localhost:3000/books/{bookId} \
-  -H 'Accept: application/json'
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "http://localhost:3000/books/{bookId}", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
 
 ```
 
@@ -426,6 +331,18 @@ fetch('http://localhost:3000/books/{bookId}',
 
 ```
 
+```python
+import requests
+headers = {
+  'Accept': 'application/json'
+}
+
+r = requests.get('http://localhost:3000/books/{bookId}', headers = headers)
+
+print(r.json())
+
+```
+
 ```ruby
 require 'rest-client'
 require 'json'
@@ -439,91 +356,6 @@ result = RestClient.get 'http://localhost:3000/books/{bookId}',
   }, headers: headers
 
 p JSON.parse(result)
-
-```
-
-```python
-import requests
-headers = {
-  'Accept': 'application/json'
-}
-
-r = requests.get('http://localhost:3000/books/{bookId}', headers = headers)
-
-print(r.json())
-
-```
-
-```php
-<?php
-
-require 'vendor/autoload.php';
-
-$headers = array(
-    'Accept' => 'application/json',
-);
-
-$client = new \GuzzleHttp\Client();
-
-// Define array of request body.
-$request_body = array();
-
-try {
-    $response = $client->request('GET','http://localhost:3000/books/{bookId}', array(
-        'headers' => $headers,
-        'json' => $request_body,
-       )
-    );
-    print_r($response->getBody()->getContents());
- }
- catch (\GuzzleHttp\Exception\BadResponseException $e) {
-    // handle exception or api errors.
-    print_r($e->getMessage());
- }
-
- // ...
-
-```
-
-```java
-URL obj = new URL("http://localhost:3000/books/{bookId}");
-HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-con.setRequestMethod("GET");
-int responseCode = con.getResponseCode();
-BufferedReader in = new BufferedReader(
-    new InputStreamReader(con.getInputStream()));
-String inputLine;
-StringBuffer response = new StringBuffer();
-while ((inputLine = in.readLine()) != null) {
-    response.append(inputLine);
-}
-in.close();
-System.out.println(response.toString());
-
-```
-
-```go
-package main
-
-import (
-       "bytes"
-       "net/http"
-)
-
-func main() {
-
-    headers := map[string][]string{
-        "Accept": []string{"application/json"},
-    }
-
-    data := bytes.NewBuffer([]byte{jsonReq})
-    req, err := http.NewRequest("GET", "http://localhost:3000/books/{bookId}", data)
-    req.Header = headers
-
-    client := &http.Client{}
-    resp, err := client.Do(req)
-    // ...
-}
 
 ```
 
